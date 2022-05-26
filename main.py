@@ -65,10 +65,54 @@ def get_threat(sent: str) -> bool:
     return threat.predict(sent)
 
 
+def get_toxic(sent: str) -> bool:
+    """
+        Проверка на токсичность
+        param:
+            sent: str - предложение
+        return:
+            bool - True если в текст токсичные
+    """
+    toxic = BertPredict(model_path='app/data/rubert-toxic-detection')
+    return toxic.predict(sent)
+
+
 if __name__ == '__main__':
-    sent = "Привет, убить тебя мало, человечишка ты"
-    print(get_imperative(sent))
-    print(get_small_talk(sent))
-    print(get_mat(sent))
-    print(get_insult(sent))
-    print(get_threat(sent))
+    print(get_toxic('Ты очень красивая'))
+    # import json
+    # import re
+    # import pandas as pd
+
+    # with open("data/stt.json", 'r') as fr:
+    #     texts = json.load(fr)
+
+    # res_texts = []
+
+    # for key, text in texts.items():
+    #     print(key)
+    #     sents = re.split("\.|\!|\?", text)
+    #     for sent in sents:
+    #         if not sent:
+    #             continue
+    #         sent_res = {}
+    #         sent_res['sent'] = sent
+    #         sent_res['is_imperative'] = get_imperative(sent)
+
+    #         small_talk = get_small_talk(sent)
+    #         sent_res['is_affect'] = small_talk[0]
+    #         sent_res['words_affect'] = small_talk[1]
+
+    #         mat = get_mat(sent)
+    #         sent_res['count_mat'] = mat[0]
+    #         sent_res['prop_mat'] = mat[1]
+    #         sent_res['list_mat'] = mat[2]
+
+    #         sent_res['is_insult'] = get_insult(sent)
+    #         sent_res['is_threat'] = get_threat(sent)
+    #         sent_res['text'] = text
+    #         sent_res['key'] = key
+
+    #         res_texts.append(sent_res)
+
+    # df = pd.DataFrame(res_texts)
+    # df.to_csv('data/result_agg.csv', header=True, index=True, sep=';')
