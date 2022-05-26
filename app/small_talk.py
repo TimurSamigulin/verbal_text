@@ -28,7 +28,7 @@ class SmallTalk():
                     words_affect.append(word)
                     affect = True
 
-        return affect, set(words_affect)
+        return affect, list(set(words_affect))
 
     def isNoun(self, word) -> bool:
         words_form = self.morph.parse(word)

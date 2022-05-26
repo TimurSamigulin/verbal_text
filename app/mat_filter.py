@@ -23,4 +23,4 @@ def count_mat_detect(text: str, mat_dict_path: str = "app/data/mats.txt"):
             count_duck += 1
             matwords.append(word)
 
-    return (count_duck, int(count_duck / words_ammount * 100), set(matwords))
+    return (count_duck, int(count_duck / words_ammount * 100), list(set(matwords)))
